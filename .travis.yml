@@ -1,0 +1,41 @@
+language: node_js
+node_js:
+- '8'
+env:
+  global:
+  - GH_USER_EMAIL="travis@example.org"
+  - GH_USER_NAME="cozy-bot"
+  - DEPLOY_REPOSITORY="git@github.com:konnectors/glisshop.git"
+  - secure: TxjFVItWGNhcIaoEZP/hJdiLqB8DokBWoKIVqlAErizKV7DKcK4w6bIkK26Mf0qlGy6AXKP2UaDG+1r3h7L5RjJsqL2YKgMgKEHsASVv6qlTAhaTUTclrkuJdv1vb3AmjU98l3N52CaVcyQguY5zoVivBAXNW4XA0zffYAQ6K+soc6CUSpXi8eY0QwBQz6LL4VUUwkoKgEODRgkTItXb1ojnA3ExcZkNtyUG5ltyegnuvfMzLfbsMos0FWQQmJSs5DRmgmqDIO1todYrydQkxj9t9+r2OsK32QVLAX48u+ut5/zjcE6xN6SLgeLpbvwRWOZG338n9s9dfo3cOFGIdBkCCVRs8MDtdi7/E+U3ZmBkL3bPTIHLnOdmaIbvhdBACoLuPwaH+GQCNn23CDfbTi15ey5yIS7/kPWrxBY+Y7xMxKtj45CUwfx87MlQLLYHgWrlIsH9utdmzeLUFrmKv3ZWu0QxwUMX1Hmu+0LGuulCyikmBvEUYZp8VLrAzqZ6fllz5sfuk59tSXAwrg9u1byecLPn4j57CkWLVlN4be31TAsinYr/psp0pDrf2UnEra5jAT71RGjvP65qMbnTi93AmPleRlVV/gyA2sjEdz2Z2Ui48L/aVMTVGOzRmdRKiXTmh2lG4fpg7YH1Hd7e5hb1GWBaDCnsYIuYcRj1PfA=
+cache:
+  yarn: true
+  directories:
+  - node_modules
+branches:
+  except:
+  - build
+  - latest
+script:
+- yarn lint
+- yarn build
+- yarn run check
+deploy:
+- provider: script
+  skip-cleanup: true
+  script: DEPLOY_BRANCH=build yarn deploy && yarn cozyPublish
+  on:
+    branch: master
+- provider: script
+  skip-cleanup: true
+  script: DEPLOY_BRANCH=build yarn deploy && yarn cozyPublish
+  on:
+    tags: true
+before_install:
+- openssl aes-256-cbc -K $encrypted_41a2723b6ed8_key -iv $encrypted_41a2723b6ed8_iv
+  -in github_deploy_key.enc -out /tmp/github_deploy_key -d
+- eval "$(ssh-agent -s)"
+- chmod 600 /tmp/github_deploy_key
+- ssh-add /tmp/github_deploy_key
+after_deploy:
+- rm /tmp/github_deploy_key
+- ssh-add -D
