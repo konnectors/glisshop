@@ -1548,10 +1548,10 @@ cosmiconfig@^5.0.6:
     js-yaml "^3.9.0"
     parse-json "^4.0.0"
 
-cozy-app-publish@0.8.5:
-  version "0.8.5"
-  resolved "https://registry.yarnpkg.com/cozy-app-publish/-/cozy-app-publish-0.8.5.tgz#fed0fdd41db799be1bc63ed3a1e644b626bd6d72"
-  integrity sha512-W9GC21vyhSJ50tNuzFB4e0xisMUAu6ZSUprNdpXrIhF7VfSXWhVSACko3CXr+HAeQI7cCNdOjGMzxZXwP1ZcYQ==
+cozy-app-publish@0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/cozy-app-publish/-/cozy-app-publish-0.9.0.tgz#730968c8c2bc8a51919658194f7c3dae35bb6b1e"
+  integrity sha512-9UQLo9O9mufY+m6qkUs1R7JrRpd+/9LowY0ev0Rb1624hTAu5AZZtgbyKlFuLTCYtB4HosLc7/l0ycPFHaDVSw==
   dependencies:
     chalk "2.4.1"
     commander "2.19.0"
@@ -2306,10 +2306,10 @@ escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
 
-eslint-config-cozy-app@1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/eslint-config-cozy-app/-/eslint-config-cozy-app-1.1.3.tgz#cb1f91642df166177ecc3932b73cfa57df9b7420"
-  integrity sha512-PG+mgYJUvpOj3YgnAmRsIfzl9rbVE8Ye8iL7XzESs5xfueFEw7gwL9jihApDm8WHujoZN9JNy0iD633uXo0Qkg==
+eslint-config-cozy-app@1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/eslint-config-cozy-app/-/eslint-config-cozy-app-1.1.4.tgz#bc8ef631d04ecb9dcefd05717cf8a3501d360231"
+  integrity sha512-+sCO5DU4MfJppV5A/lZM0S4pWq2lngn3/rp4rWqRtG9DyDYjzuRsel7Q/ZOm/HqZQCqmqsI95MaBqEFHPnUBaQ==
   dependencies:
     babel-eslint "8.2.6"
     eslint "5.3.0"
@@ -7545,10 +7545,10 @@ webpack-sources@^1.3.0:
     source-list-map "^2.0.0"
     source-map "~0.6.1"
 
-webpack@4.20.2:
-  version "4.20.2"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.20.2.tgz#89f6486b6bb276a91b0823453d377501fc625b5a"
-  integrity sha512-75WFUMblcWYcocjSLlXCb71QuGyH7egdBZu50FtBGl2Nso8CK3Ej+J7bTZz2FPFq5l6fzCisD9modB7t30ikuA==
+webpack@4.21.0:
+  version "4.21.0"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.21.0.tgz#bd03605c0f48c0d4aaaef78ead2769485e5afd92"
+  integrity sha512-CGBeop4AYR0dcmk9Afl33qQULwTHQCXQPAIBTHMJoy9DpY8FPUDna/NUlAGTr5o5y9QC901Ww3wCY4wNo1X9Lw==
   dependencies:
     "@webassemblyjs/ast" "1.7.8"
     "@webassemblyjs/helper-module-context" "1.7.8"
