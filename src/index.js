@@ -5,14 +5,13 @@ process.env.SENTRY_DSN =
 const {
   BaseKonnector,
   requestFactory,
-  signin,
   scrape,
   saveBills,
   log
 } = require('cozy-konnector-libs')
 const request = requestFactory({
   cheerio: true,
-  debug: false,
+  debug: true,
   jar: true
 })
 const moment = require('moment')
@@ -24,39 +23,41 @@ module.exports = new BaseKonnector(start)
 async function start(fields) {
   log('info', 'Authenticating ...')
   await authenticate(fields.login, fields.password)
-  log('info', 'Successfully logged in')
-  log('info', 'Fetching the list of documents')
-  const $ = await request(`${baseUrl}/mon_compte/mes_commandes/`)
-  log('info', 'Parsing list of documents')
-  const documents = await parseDocuments($)
-  log('info', `${documents.length} documents found `)
-  log('info', 'Saving data to Cozy')
-  await saveBills(documents, fields.folderPath, {
-    identifiers: ['glisshop'],
-    contentType: 'application/pdf'
-  })
+  // log('info', 'Successfully logged in')
+  // log('info', 'Fetching the list of documents')
+  // const $ = await request(`${baseUrl}/mon_compte/mes_commandes/`)
+  // log('info', 'Parsing list of documents')
+  // const documents = await parseDocuments($)
+  // log('info', `${documents.length} documents found `)
+  // log('info', 'Saving data to Cozy')
+  // await saveBills(documents, fields.folderPath, {
+  //   identifiers: ['glisshop'],
+  //   contentType: 'application/pdf'
+  // })
 }
 
-function authenticate(username, password) {
-  return signin({
-    url: `${baseUrl}/connexion/`,
-    formSelector: 'form[role="form"]',
-    formData: {
-      'account[mail]': username,
-      'account[pass]': password
-    },
-    validate: (statusCode, $) => {
-      if (
-        $(`a[href='https://www.glisshop.com/customers/logout/']`).text() ===
-        'Déconnexion'
-      ) {
-        return true
-      } else {
-        log('error', $('.error').text())
-        return false
+async function authenticate(username, password) {
+  await request.post(
+    'https://www.glisshop.com/ajax.V1.php/fr_FR/Rbs/User/Login',
+    {
+      headers: {
+        'X-HTTP-Method-Override': 'PUT'
+      },
+      json: true,
+      body: {
+        websiteId: 100187,
+        sectionId: 100187,
+        pageId: 100232,
+        data: {
+          login: username,
+          password,
+          realm: 'web',
+          rememberMe: true,
+          device: 'Firefox - Ubuntu'
+        }
       }
     }
-  })
+  )
 }
 
 function parseDocuments($) {
